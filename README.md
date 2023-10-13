@@ -1,7 +1,9 @@
 # Autonomous-Systems-B-Lab_Group-D
 
 Tasks 1: Verification and Validation Env.
-• Each group member
+
+• Each group member:
+
 • Model your own example (should have nothing to do with ‘Precision Farming’) to familiarize with TAPAAL
 • Verify: There is no deadlock in the model
 
