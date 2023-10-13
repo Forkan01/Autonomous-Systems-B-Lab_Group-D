@@ -11,3 +11,7 @@ Tasks 1: Verification and Validation Env.
 • Milestone 1: Due to 20.10.2023
 - Explain example/TAPPAAL
 - Explain all features of Timed Petri Nets
+
+# Create your own file with your name
+here you will upload all the personal tasks you have done under the milestones.
+see the examples I created (my name George, your name 2)
