@@ -9,5 +9,5 @@ Tasks 1: Verification and Validation Env.
 - Verify: There is no deadlock in the model
 
 • Milestone 1: Due to 20.10.2023
-• Explain example/TAPPAAL
-• Explain all features of Timed Petri Nets
+- Explain example/TAPPAAL
+- Explain all features of Timed Petri Nets
