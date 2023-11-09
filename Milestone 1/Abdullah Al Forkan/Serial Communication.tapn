@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pnml xmlns="http://www.informatik.hu-berlin.de/top/pnml/ptNetb">
+  <net active="true" id="TAPN1" type="P/T net">
+    <place displayName="true" id="Rdy_Send" initialMarking="1" invariant="&lt; inf" name="Rdy_Send" nameOffsetX="0" nameOffsetY="0" positionX="105" positionY="120"/>
+    <place displayName="true" id="Wait_Ack" initialMarking="0" invariant="&lt; inf" name="Wait_Ack" nameOffsetX="0" nameOffsetY="0" positionX="105" positionY="285"/>
+    <place displayName="true" id="Ack_Rcvd" initialMarking="0" invariant="&lt; inf" name="Ack_Rcvd" nameOffsetX="0" nameOffsetY="0" positionX="105" positionY="420"/>
+    <place displayName="true" id="Buffer_Out" initialMarking="0" invariant="&lt; inf" name="Buffer_Out" nameOffsetX="0" nameOffsetY="0" positionX="255" positionY="195"/>
+    <place displayName="true" id="Buffer_In" initialMarking="0" invariant="&lt; inf" name="Buffer_In" nameOffsetX="0" nameOffsetY="0" positionX="255" positionY="360"/>
+    <place displayName="true" id="Rdy_Rcv" initialMarking="1" invariant="&lt; inf" name="Rdy_Rcv" nameOffsetX="0" nameOffsetY="0" positionX="390" positionY="105"/>
+    <place displayName="true" id="Msg_Rcvd" initialMarking="0" invariant="&lt; inf" name="Msg_Rcvd" nameOffsetX="0" nameOffsetY="0" positionX="390" positionY="285"/>
+    <place displayName="true" id="Ack_Sent" initialMarking="0" invariant="&lt; inf" name="Ack_Sent" nameOffsetX="0" nameOffsetY="0" positionX="390" positionY="420"/>
+    <transition angle="0" displayName="true" id="Snd_Msg" infiniteServer="false" name="Snd_Msg" nameOffsetX="0" nameOffsetY="0" player="0" positionX="105" positionY="195" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Rcv_Ack" infiniteServer="false" name="Rcv_Ack" nameOffsetX="0" nameOffsetY="0" player="0" positionX="105" positionY="345" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Rcv_Msg" infiniteServer="false" name="Rcv_Msg" nameOffsetX="0" nameOffsetY="0" player="0" positionX="390" positionY="195" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Send_Ack" infiniteServer="false" name="Send_Ack" nameOffsetX="0" nameOffsetY="0" player="0" positionX="390" positionY="360" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Process1" infiniteServer="false" name="Process1" nameOffsetX="0" nameOffsetY="0" player="0" positionX="30" positionY="270" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Process2" infiniteServer="false" name="Process2" nameOffsetX="0" nameOffsetY="0" player="0" positionX="450" positionY="255" priority="0" urgent="false"/>
+    <arc id="A0" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Rdy_Send" target="Snd_Msg" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="120" yCoord="150"/>
+      <arcpath arcPointType="false" id="1" xCoord="120" yCoord="195"/>
+    </arc>
+    <arc id="A1" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Snd_Msg" target="Wait_Ack" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="120" yCoord="225"/>
+      <arcpath arcPointType="false" id="1" xCoord="120" yCoord="285"/>
+    </arc>
+    <arc id="A2" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Wait_Ack" target="Rcv_Ack" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="120" yCoord="315"/>
+      <arcpath arcPointType="false" id="1" xCoord="120" yCoord="345"/>
+    </arc>
+    <arc id="A3" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Rcv_Ack" target="Ack_Rcvd" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="120" yCoord="375"/>
+      <arcpath arcPointType="false" id="1" xCoord="120" yCoord="420"/>
+    </arc>
+    <arc id="A4" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Ack_Rcvd" target="Process1" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="105" yCoord="435"/>
+      <arcpath arcPointType="false" id="1" xCoord="45" yCoord="435"/>
+      <arcpath arcPointType="false" id="2" xCoord="45" yCoord="300"/>
+    </arc>
+    <arc id="A5" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Process1" target="Rdy_Send" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="45" yCoord="270"/>
+      <arcpath arcPointType="false" id="1" xCoord="46" yCoord="133"/>
+      <arcpath arcPointType="false" id="2" xCoord="105" yCoord="134"/>
+    </arc>
+    <arc id="A6" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Snd_Msg" target="Buffer_Out" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="124" yCoord="210"/>
+      <arcpath arcPointType="false" id="1" xCoord="255" yCoord="210"/>
+    </arc>
+    <arc id="A7" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Buffer_Out" target="Rcv_Msg" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="284" yCoord="209"/>
+      <arcpath arcPointType="false" id="1" xCoord="400" yCoord="205"/>
+    </arc>
+    <arc id="A8" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Rdy_Rcv" target="Rcv_Msg" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="405" yCoord="135"/>
+      <arcpath arcPointType="false" id="1" xCoord="405" yCoord="195"/>
+    </arc>
+    <arc id="A9" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Rcv_Msg" target="Msg_Rcvd" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="405" yCoord="225"/>
+      <arcpath arcPointType="false" id="1" xCoord="405" yCoord="285"/>
+    </arc>
+    <arc id="A10" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Msg_Rcvd" target="Send_Ack" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="405" yCoord="315"/>
+      <arcpath arcPointType="false" id="1" xCoord="405" yCoord="360"/>
+    </arc>
+    <arc id="A11" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Send_Ack" target="Ack_Sent" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="405" yCoord="390"/>
+      <arcpath arcPointType="false" id="1" xCoord="405" yCoord="420"/>
+    </arc>
+    <arc id="A12" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Ack_Sent" target="Process2" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="419" yCoord="435"/>
+      <arcpath arcPointType="false" id="1" xCoord="467" yCoord="436"/>
+      <arcpath arcPointType="false" id="2" xCoord="464" yCoord="289"/>
+      <arcpath arcPointType="false" id="3" xCoord="465" yCoord="285"/>
+    </arc>
+    <arc id="A13" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Process2" target="Rdy_Rcv" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="465" yCoord="255"/>
+      <arcpath arcPointType="false" id="1" xCoord="464" yCoord="118"/>
+      <arcpath arcPointType="false" id="2" xCoord="419" yCoord="119"/>
+    </arc>
+    <arc id="A14" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Send_Ack" target="Buffer_In" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="399" yCoord="375"/>
+      <arcpath arcPointType="false" id="1" xCoord="285" yCoord="375"/>
+    </arc>
+    <arc id="A15" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Buffer_In" target="Rcv_Ack" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="255" yCoord="373"/>
+      <arcpath arcPointType="false" id="1" xCoord="124" yCoord="365"/>
+    </arc>
+  </net>
+  <k-bound bound="3"/>
+  <feature isGame="false" isTimed="false"/>
+</pnml>

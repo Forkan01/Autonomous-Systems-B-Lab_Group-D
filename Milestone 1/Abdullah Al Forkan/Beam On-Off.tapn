@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pnml xmlns="http://www.informatik.hu-berlin.de/top/pnml/ptNetb">
+  <net active="true" id="TAPN1" type="P/T net">
+    <place displayName="true" id="Nurse" initialMarking="1" invariant="&lt; inf" name="Nurse" nameOffsetX="0" nameOffsetY="0" positionX="75" positionY="75"/>
+    <place displayName="true" id="MachineInactive" initialMarking="1" invariant="&lt; inf" name="MachineInactive" nameOffsetX="0" nameOffsetY="0" positionX="75" positionY="150"/>
+    <place displayName="true" id="BeamOff" initialMarking="0" invariant="&lt; inf" name="BeamOff" nameOffsetX="0" nameOffsetY="0" positionX="405" positionY="105"/>
+    <place displayName="true" id="BeamOn" initialMarking="0" invariant="&lt; inf" name="BeamOn" nameOffsetX="0" nameOffsetY="0" positionX="405" positionY="375"/>
+    <transition angle="0" displayName="true" id="Activate" infiniteServer="false" name="Activate" nameOffsetX="0" nameOffsetY="0" player="0" positionX="195" positionY="75" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="SafeState" infiniteServer="false" name="SafeState" nameOffsetX="0" nameOffsetY="0" player="0" positionX="195" positionY="150" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="TurnOffBeam" infiniteServer="false" name="TurnOffBeam" nameOffsetX="0" nameOffsetY="0" player="0" positionX="315" positionY="270" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="BeginTreatment" infiniteServer="false" name="BeginTreatment" nameOffsetX="0" nameOffsetY="0" player="0" positionX="495" positionY="270" priority="0" urgent="false"/>
+    <arc id="A0" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Nurse" target="Activate" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="104" yCoord="89"/>
+      <arcpath arcPointType="false" id="1" xCoord="205" yCoord="85"/>
+    </arc>
+    <arc id="A2" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Activate" target="BeamOff" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="214" yCoord="90"/>
+      <arcpath arcPointType="false" id="1" xCoord="405" yCoord="117"/>
+    </arc>
+    <arc id="A3" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="BeamOff" target="SafeState" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="405" yCoord="123"/>
+      <arcpath arcPointType="false" id="1" xCoord="214" yCoord="165"/>
+    </arc>
+    <arc id="A4" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="BeamOff" target="BeginTreatment" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="427" yCoord="132"/>
+      <arcpath arcPointType="false" id="1" xCoord="510" yCoord="270"/>
+    </arc>
+    <arc id="A5" inscription="1" nameOffsetX="0" nameOffsetY="0" source="BeginTreatment" target="BeamOn" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="504" yCoord="285"/>
+      <arcpath arcPointType="false" id="1" xCoord="429" yCoord="378"/>
+    </arc>
+    <arc id="A6" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="BeamOn" target="TurnOffBeam" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="410" yCoord="378"/>
+      <arcpath arcPointType="false" id="1" xCoord="334" yCoord="285"/>
+    </arc>
+    <arc id="A7" inscription="1" nameOffsetX="0" nameOffsetY="0" source="TurnOffBeam" target="BeamOff" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="330" yCoord="270"/>
+      <arcpath arcPointType="false" id="1" xCoord="412" yCoord="132"/>
+    </arc>
+    <arc id="A8" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="MachineInactive" target="Activate" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="102" yCoord="157"/>
+      <arcpath arcPointType="false" id="1" xCoord="204" yCoord="95"/>
+    </arc>
+    <arc id="A9" inscription="1" nameOffsetX="0" nameOffsetY="0" source="SafeState" target="MachineInactive" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="204" yCoord="165"/>
+      <arcpath arcPointType="false" id="1" xCoord="105" yCoord="165"/>
+    </arc>
+    <arc id="A10" inscription="1" nameOffsetX="0" nameOffsetY="0" source="SafeState" target="Nurse" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="204" yCoord="165"/>
+      <arcpath arcPointType="false" id="1" xCoord="102" yCoord="98"/>
+    </arc>
+  </net>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="4" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="null" gcd="false" hashTableSize="null" inclusionPlaces="*NONE*" name="Query Comment/Name Here" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <deadlock/>
+    </formula>
+  </query>
+  <k-bound bound="3"/>
+  <feature isGame="false" isTimed="false"/>
+</pnml>
