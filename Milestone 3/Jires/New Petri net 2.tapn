@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pnml xmlns="http://www.informatik.hu-berlin.de/top/pnml/ptNetb">
+  <net active="true" id="TAPN1" type="P/T net">
+    <place displayName="true" id="Drone_Start" initialMarking="1" invariant="&lt; inf" name="Drone_Start" nameOffsetX="0" nameOffsetY="0" positionX="300" positionY="390"/>
+    <place displayName="true" id="Scan_Weed" initialMarking="0" invariant="&lt; inf" name="Scan_Weed" nameOffsetX="0" nameOffsetY="0" positionX="510" positionY="300"/>
+    <place displayName="true" id="Scan_Sick_SB" initialMarking="0" invariant="&lt; inf" name="Scan_Sick_SB" nameOffsetX="-6" nameOffsetY="27" positionX="510" positionY="465"/>
+    <place displayName="true" id="Save_location" initialMarking="0" invariant="&lt; inf" name="Save_location" nameOffsetX="108" nameOffsetY="6" positionX="720" positionY="390"/>
+    <place displayName="true" id="P12" initialMarking="0" invariant="&lt; inf" name="P12" nameOffsetX="0" nameOffsetY="0" positionX="510" positionY="390"/>
+    <transition angle="0" displayName="true" id="T5" infiniteServer="false" name="T5" nameOffsetX="0" nameOffsetY="0" player="0" positionX="390" positionY="390" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="T6" infiniteServer="false" name="T6" nameOffsetX="0" nameOffsetY="0" player="0" positionX="615" positionY="390" priority="0" urgent="false"/>
+    <transition angle="180" displayName="true" id="T8" infiniteServer="false" name="T8" nameOffsetX="0" nameOffsetY="0" player="0" positionX="510" positionY="540" priority="0" urgent="false"/>
+    <arc id="A0" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T5" target="Scan_Weed" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="409" yCoord="405"/>
+      <arcpath arcPointType="false" id="1" xCoord="513" yCoord="324"/>
+    </arc>
+    <arc id="A1" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T5" target="Scan_Sick_SB" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="409" yCoord="405"/>
+      <arcpath arcPointType="false" id="1" xCoord="512" yCoord="471"/>
+    </arc>
+    <arc id="A2" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Scan_Weed" target="T6" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="536" yCoord="324"/>
+      <arcpath arcPointType="false" id="1" xCoord="625" yCoord="399"/>
+    </arc>
+    <arc id="A3" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Scan_Sick_SB" target="T6" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="537" yCoord="471"/>
+      <arcpath arcPointType="false" id="1" xCoord="624" yCoord="417"/>
+    </arc>
+    <arc id="A4" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Drone_Start" target="T5" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="329" yCoord="404"/>
+      <arcpath arcPointType="false" id="1" xCoord="400" yCoord="400"/>
+    </arc>
+    <arc id="A5" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T6" target="Save_location" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="634" yCoord="405"/>
+      <arcpath arcPointType="false" id="1" xCoord="720" yCoord="405"/>
+    </arc>
+    <arc id="A7" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T5" target="P12" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="409" yCoord="405"/>
+      <arcpath arcPointType="false" id="1" xCoord="510" yCoord="405"/>
+    </arc>
+    <arc id="A8" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="P12" target="T6" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="539" yCoord="405"/>
+      <arcpath arcPointType="false" id="1" xCoord="624" yCoord="408"/>
+    </arc>
+    <arc id="A9" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="Save_location" target="T8" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="735" yCoord="419"/>
+      <arcpath arcPointType="false" id="1" xCoord="738" yCoord="557"/>
+      <arcpath arcPointType="false" id="2" xCoord="530" yCoord="553"/>
+    </arc>
+    <arc id="A10" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T8" target="Drone_Start" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="520" yCoord="554"/>
+      <arcpath arcPointType="false" id="1" xCoord="316" yCoord="551"/>
+      <arcpath arcPointType="false" id="2" xCoord="315" yCoord="419"/>
+    </arc>
+  </net>
+  <k-bound bound="3"/>
+  <feature isGame="false" isTimed="true"/>
+</pnml>
