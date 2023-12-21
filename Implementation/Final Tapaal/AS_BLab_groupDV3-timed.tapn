@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pnml xmlns="http://www.informatik.hu-berlin.de/top/pnml/ptNetb">
+  <shared-place initialMarking="0" invariant="&lt; inf" name="server"/>
+  <net active="true" id="Surveillance_drone" type="P/T net">
+    <place displayName="true" id="drone_start" initialMarking="3" invariant="&lt; inf" name="drone_start" nameOffsetX="0" nameOffsetY="0" positionX="270" positionY="135"/>
+    <place displayName="true" id="check_sickplant" initialMarking="0" invariant="&lt; inf" name="check_sickplant" nameOffsetX="0" nameOffsetY="0" positionX="540" positionY="225"/>
+    <place displayName="true" id="Check_soil_moisture" initialMarking="0" invariant="&lt; inf" name="Check_soil_moisture" nameOffsetX="0" nameOffsetY="0" positionX="555" positionY="135"/>
+    <place displayName="true" id="scan_weed" initialMarking="0" invariant="&lt; inf" name="scan_weed" nameOffsetX="0" nameOffsetY="0" positionX="555" positionY="45"/>
+    <place displayName="true" id="save_location_to_server" initialMarking="0" invariant="&lt; inf" name="save_location_to_server" nameOffsetX="68" nameOffsetY="-5" positionX="870" positionY="135"/>
+    <place displayName="true" id="server" initialMarking="0" invariant="&lt; inf" name="server" nameOffsetX="0" nameOffsetY="0" positionX="870" positionY="345"/>
+    <transition angle="0" displayName="true" id="Scan_W" infiniteServer="false" name="Scan_W" nameOffsetX="0" nameOffsetY="0" player="0" positionX="390" positionY="60" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Save_weed_location" infiniteServer="false" name="Save_weed_location" nameOffsetX="16" nameOffsetY="0" player="0" positionX="690" positionY="60" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Return" infiniteServer="false" name="Return" nameOffsetX="0" nameOffsetY="0" player="0" positionX="540" positionY="360" priority="0" urgent="false"/>
+    <transition angle="90" displayName="true" id="T3" infiniteServer="false" name="T3" nameOffsetX="0" nameOffsetY="0" player="0" positionX="870" positionY="240" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Check_SM" infiniteServer="false" name="Check_SM" nameOffsetX="0" nameOffsetY="0" player="0" positionX="390" positionY="135" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Check_SP" infiniteServer="false" name="Check_SP" nameOffsetX="0" nameOffsetY="0" player="0" positionX="390" positionY="210" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Soil_moisture_data" infiniteServer="false" name="Soil_moisture_data" nameOffsetX="21" nameOffsetY="1" player="0" positionX="690" positionY="135" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="Save_Sickplant_location" infiniteServer="false" name="Save_Sickplant_location" nameOffsetX="47" nameOffsetY="-1" player="0" positionX="690" positionY="225" priority="0" urgent="false"/>
+    <arc id="A1" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Scan_W" target="scan_weed" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="409" yCoord="75"/>
+      <arcpath arcPointType="false" id="1" xCoord="555" yCoord="61"/>
+    </arc>
+    <arc id="A4" inscription="[1,2]" nameOffsetX="0" nameOffsetY="0" source="scan_weed" target="Save_weed_location" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="584" yCoord="61"/>
+      <arcpath arcPointType="false" id="1" xCoord="699" yCoord="75"/>
+    </arc>
+    <arc id="A8" inscription="[2,3]" nameOffsetX="0" nameOffsetY="0" source="save_location_to_server" target="T3" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="884" yCoord="164"/>
+      <arcpath arcPointType="false" id="1" xCoord="884" yCoord="249"/>
+    </arc>
+    <arc id="A9" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T3" target="server" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="884" yCoord="259"/>
+      <arcpath arcPointType="false" id="1" xCoord="884" yCoord="345"/>
+    </arc>
+    <arc id="A10" inscription="[5,10]" nameOffsetX="0" nameOffsetY="0" source="server" target="Return" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="870" yCoord="360"/>
+      <arcpath arcPointType="false" id="1" xCoord="559" yCoord="375"/>
+    </arc>
+    <arc id="A11" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Return" target="drone_start" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="549" yCoord="375"/>
+      <arcpath arcPointType="false" id="1" xCoord="298" yCoord="354"/>
+      <arcpath arcPointType="false" id="2" xCoord="285" yCoord="164"/>
+    </arc>
+    <arc id="A12" inscription="[0,1]" nameOffsetX="0" nameOffsetY="0" source="drone_start" target="Scan_W" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="297" yCoord="141"/>
+      <arcpath arcPointType="false" id="1" xCoord="399" yCoord="75"/>
+    </arc>
+    <arc id="A13" inscription="[0,1]" nameOffsetX="0" nameOffsetY="0" source="drone_start" target="Check_SM" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="300" yCoord="150"/>
+      <arcpath arcPointType="false" id="1" xCoord="399" yCoord="150"/>
+    </arc>
+    <arc id="A14" inscription="[0,1]" nameOffsetX="0" nameOffsetY="0" source="drone_start" target="Check_SP" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="297" yCoord="158"/>
+      <arcpath arcPointType="false" id="1" xCoord="399" yCoord="225"/>
+    </arc>
+    <arc id="A15" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Check_SM" target="Check_soil_moisture" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="409" yCoord="150"/>
+      <arcpath arcPointType="false" id="1" xCoord="555" yCoord="150"/>
+    </arc>
+    <arc id="A16" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Check_SP" target="check_sickplant" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="409" yCoord="225"/>
+      <arcpath arcPointType="false" id="1" xCoord="540" yCoord="238"/>
+    </arc>
+    <arc id="A17" inscription="[1,2]" nameOffsetX="0" nameOffsetY="0" source="Check_soil_moisture" target="Soil_moisture_data" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="585" yCoord="150"/>
+      <arcpath arcPointType="false" id="1" xCoord="699" yCoord="150"/>
+    </arc>
+    <arc id="A18" inscription="[1,2]" nameOffsetX="0" nameOffsetY="0" source="check_sickplant" target="Save_Sickplant_location" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="570" yCoord="240"/>
+      <arcpath arcPointType="false" id="1" xCoord="699" yCoord="240"/>
+    </arc>
+    <arc id="A19" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Save_weed_location" target="save_location_to_server" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="709" yCoord="75"/>
+      <arcpath arcPointType="false" id="1" xCoord="871" yCoord="144"/>
+    </arc>
+    <arc id="A20" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Soil_moisture_data" target="save_location_to_server" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="709" yCoord="150"/>
+      <arcpath arcPointType="false" id="1" xCoord="870" yCoord="150"/>
+    </arc>
+    <arc id="A21" inscription="1" nameOffsetX="0" nameOffsetY="0" source="Save_Sickplant_location" target="save_location_to_server" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="709" yCoord="240"/>
+      <arcpath arcPointType="false" id="1" xCoord="871" yCoord="156"/>
+    </arc>
+  </net>
+  <net active="true" id="Irrigation_system" type="P/T net">
+    <place displayName="true" id="server" initialMarking="0" invariant="&lt; inf" name="server" nameOffsetX="0" nameOffsetY="0" positionX="180" positionY="180"/>
+    <place displayName="true" id="get_coordinate" initialMarking="0" invariant="&lt; inf" name="get_coordinate" nameOffsetX="0" nameOffsetY="0" positionX="480" positionY="180"/>
+    <place displayName="true" id="fly_around" initialMarking="0" invariant="&lt; inf" name="fly_around" nameOffsetX="0" nameOffsetY="0" positionX="480" positionY="285"/>
+    <place displayName="true" id="navigate" initialMarking="0" invariant="&lt; inf" name="navigate" nameOffsetX="0" nameOffsetY="0" positionX="720" positionY="210"/>
+    <place displayName="true" id="spray_water" initialMarking="0" invariant="&lt; inf" name="spray_water" nameOffsetX="0" nameOffsetY="0" positionX="870" positionY="270"/>
+    <transition angle="0" displayName="true" id="T2" infiniteServer="false" name="T2" nameOffsetX="0" nameOffsetY="0" player="0" positionX="330" positionY="165" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="T3" infiniteServer="false" name="T3" nameOffsetX="0" nameOffsetY="0" player="0" positionX="600" positionY="210" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="T4" infiniteServer="false" name="T4" nameOffsetX="0" nameOffsetY="0" player="0" positionX="795" positionY="210" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="T5" infiniteServer="false" name="T5" nameOffsetX="0" nameOffsetY="0" player="0" positionX="480" positionY="375" priority="0" urgent="false"/>
+    <arc id="A0" inscription="[3,4]" nameOffsetX="0" nameOffsetY="0" source="server" target="T2" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="209" yCoord="193"/>
+      <arcpath arcPointType="false" id="1" xCoord="339" yCoord="180"/>
+    </arc>
+    <arc id="A1" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T2" target="get_coordinate" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="349" yCoord="180"/>
+      <arcpath arcPointType="false" id="1" xCoord="480" yCoord="193"/>
+    </arc>
+    <arc id="A2" inscription="[4,5]" nameOffsetX="0" nameOffsetY="0" source="get_coordinate" target="T3" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="509" yCoord="198"/>
+      <arcpath arcPointType="false" id="1" xCoord="610" yCoord="220"/>
+    </arc>
+    <arc id="A3" inscription="[4,5]" nameOffsetX="0" nameOffsetY="0" source="fly_around" target="T3" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="507" yCoord="292"/>
+      <arcpath arcPointType="false" id="1" xCoord="609" yCoord="230"/>
+    </arc>
+    <arc id="A4" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T2" target="fly_around" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="349" yCoord="180"/>
+      <arcpath arcPointType="false" id="1" xCoord="483" yCoord="290"/>
+    </arc>
+    <arc id="A5" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T3" target="navigate" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="619" yCoord="225"/>
+      <arcpath arcPointType="false" id="1" xCoord="720" yCoord="225"/>
+    </arc>
+    <arc id="A6" inscription="[5,6]" nameOffsetX="0" nameOffsetY="0" source="navigate" target="T4" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="750" yCoord="225"/>
+      <arcpath arcPointType="false" id="1" xCoord="804" yCoord="225"/>
+    </arc>
+    <arc id="A7" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T4" target="spray_water" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="814" yCoord="225"/>
+      <arcpath arcPointType="false" id="1" xCoord="873" yCoord="275"/>
+    </arc>
+    <arc id="A8" inscription="[7,8]" nameOffsetX="0" nameOffsetY="0" source="spray_water" target="T5" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="870" yCoord="288"/>
+      <arcpath arcPointType="false" id="1" xCoord="499" yCoord="390"/>
+    </arc>
+    <arc id="A9" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T5" target="server" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="489" yCoord="390"/>
+      <arcpath arcPointType="false" id="1" xCoord="207" yCoord="203"/>
+    </arc>
+  </net>
+  <net active="true" id="sick_plant_treatment" type="P/T net">
+    <place displayName="true" id="server" initialMarking="0" invariant="&lt; inf" name="server" nameOffsetX="0" nameOffsetY="0" positionX="195" positionY="135"/>
+    <place displayName="true" id="locate_coordinate" initialMarking="0" invariant="&lt; inf" name="locate_coordinate" nameOffsetX="56" nameOffsetY="5" positionX="405" positionY="120"/>
+    <place displayName="true" id="identify_lesion_segmentation" initialMarking="0" invariant="&lt; inf" name="identify_lesion_segmentation" nameOffsetX="0" nameOffsetY="0" positionX="600" positionY="195"/>
+    <place displayName="true" id="treat_plant" initialMarking="0" invariant="&lt; inf" name="treat_plant" nameOffsetX="0" nameOffsetY="0" positionX="540" positionY="315"/>
+    <transition angle="0" displayName="true" id="pickup_sickplant_coordinate" infiniteServer="false" name="pickup_sickplant_coordinate" nameOffsetX="49" nameOffsetY="-9" player="0" positionX="285" positionY="120" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="T1" infiniteServer="false" name="T1" nameOffsetX="0" nameOffsetY="0" player="0" positionX="525" positionY="120" priority="0" urgent="false"/>
+    <transition angle="90" displayName="true" id="true" infiniteServer="false" name="true" nameOffsetX="0" nameOffsetY="0" player="0" positionX="540" positionY="255" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="false" infiniteServer="false" name="false" nameOffsetX="0" nameOffsetY="0" player="0" positionX="390" positionY="195" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="return_status" infiniteServer="false" name="return_status" nameOffsetX="0" nameOffsetY="0" player="0" positionX="330" positionY="270" priority="0" urgent="false"/>
+    <arc id="A0" inscription="[3,4]" nameOffsetX="0" nameOffsetY="0" source="server" target="pickup_sickplant_coordinate" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="224" yCoord="147"/>
+      <arcpath arcPointType="false" id="1" xCoord="294" yCoord="135"/>
+    </arc>
+    <arc id="A1" inscription="1" nameOffsetX="0" nameOffsetY="0" source="pickup_sickplant_coordinate" target="locate_coordinate" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="304" yCoord="135"/>
+      <arcpath arcPointType="false" id="1" xCoord="405" yCoord="135"/>
+    </arc>
+    <arc id="A2" inscription="[4,5]" nameOffsetX="0" nameOffsetY="0" source="locate_coordinate" target="T1" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="435" yCoord="135"/>
+      <arcpath arcPointType="false" id="1" xCoord="534" yCoord="135"/>
+    </arc>
+    <arc id="A3" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T1" target="identify_lesion_segmentation" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="544" yCoord="135"/>
+      <arcpath arcPointType="false" id="1" xCoord="604" yCoord="199"/>
+    </arc>
+    <arc id="A4" inscription="[5,6]" nameOffsetX="0" nameOffsetY="0" source="identify_lesion_segmentation" target="false" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="600" yCoord="210"/>
+      <arcpath arcPointType="false" id="1" xCoord="409" yCoord="210"/>
+    </arc>
+    <arc id="A5" inscription="1" nameOffsetX="0" nameOffsetY="0" source="false" target="server" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="399" yCoord="210"/>
+      <arcpath arcPointType="false" id="1" xCoord="224" yCoord="154"/>
+    </arc>
+    <arc id="A6" inscription="[5,6]" nameOffsetX="0" nameOffsetY="0" source="identify_lesion_segmentation" target="true" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="603" yCoord="219"/>
+      <arcpath arcPointType="false" id="1" xCoord="554" yCoord="264"/>
+    </arc>
+    <arc id="A7" inscription="1" nameOffsetX="0" nameOffsetY="0" source="true" target="treat_plant" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="554" yCoord="274"/>
+      <arcpath arcPointType="false" id="1" xCoord="554" yCoord="315"/>
+    </arc>
+    <arc id="A8" inscription="[6,7]" nameOffsetX="0" nameOffsetY="0" source="treat_plant" target="return_status" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="540" yCoord="326"/>
+      <arcpath arcPointType="false" id="1" xCoord="349" yCoord="285"/>
+    </arc>
+    <arc id="A9" inscription="1" nameOffsetX="0" nameOffsetY="0" source="return_status" target="server" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="339" yCoord="285"/>
+      <arcpath arcPointType="false" id="1" xCoord="220" yCoord="160"/>
+    </arc>
+  </net>
+  <net active="true" id="weeding1" type="P/T net">
+    <place displayName="true" id="server" initialMarking="0" invariant="&lt; inf" name="server" nameOffsetX="0" nameOffsetY="0" positionX="225" positionY="150"/>
+    <place displayName="true" id="scan_weed_or_sugarbeet" initialMarking="0" invariant="&lt; inf" name="scan_weed_or_sugarbeet" nameOffsetX="0" nameOffsetY="0" positionX="690" positionY="120"/>
+    <place displayName="true" id="eliminate_weed" initialMarking="0" invariant="&lt; inf" name="eliminate_weed" nameOffsetX="0" nameOffsetY="0" positionX="720" positionY="285"/>
+    <place displayName="true" id="sugar_beet" initialMarking="0" invariant="&lt; inf" name="sugar_beet" nameOffsetX="0" nameOffsetY="0" positionX="375" positionY="360"/>
+    <transition angle="0" displayName="true" id="go_to_coordinate" infiniteServer="false" name="go_to_coordinate" nameOffsetX="0" nameOffsetY="0" player="0" positionX="450" positionY="120" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="T1" infiniteServer="false" name="T1" nameOffsetX="0" nameOffsetY="0" player="0" positionX="630" positionY="195" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="T2" infiniteServer="false" name="T2" nameOffsetX="0" nameOffsetY="0" player="0" positionX="780" positionY="195" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="T3" infiniteServer="false" name="T3" nameOffsetX="0" nameOffsetY="0" player="0" positionX="480" positionY="240" priority="0" urgent="false"/>
+    <transition angle="0" displayName="true" id="T4" infiniteServer="false" name="T4" nameOffsetX="0" nameOffsetY="0" player="0" positionX="300" positionY="240" priority="0" urgent="false"/>
+    <arc id="A0" inscription="[4,5]" nameOffsetX="0" nameOffsetY="0" source="server" target="go_to_coordinate" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="254" yCoord="162"/>
+      <arcpath arcPointType="false" id="1" xCoord="459" yCoord="135"/>
+    </arc>
+    <arc id="A1" inscription="1" nameOffsetX="0" nameOffsetY="0" source="go_to_coordinate" target="scan_weed_or_sugarbeet" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="469" yCoord="135"/>
+      <arcpath arcPointType="false" id="1" xCoord="690" yCoord="135"/>
+    </arc>
+    <arc id="A2" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T2" target="scan_weed_or_sugarbeet" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="790" yCoord="205"/>
+      <arcpath arcPointType="false" id="1" xCoord="716" yCoord="144"/>
+    </arc>
+    <arc id="A3" inscription="[5,6]" nameOffsetX="0" nameOffsetY="0" source="scan_weed_or_sugarbeet" target="T1" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="695" yCoord="146"/>
+      <arcpath arcPointType="false" id="1" xCoord="650" yCoord="205"/>
+    </arc>
+    <arc id="A4" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T1" target="eliminate_weed" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="649" yCoord="215"/>
+      <arcpath arcPointType="false" id="1" xCoord="724" yCoord="289"/>
+    </arc>
+    <arc id="A5" inscription="[5,6]" nameOffsetX="0" nameOffsetY="0" source="eliminate_weed" target="T2" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="743" yCoord="287"/>
+      <arcpath arcPointType="false" id="1" xCoord="789" yCoord="215"/>
+    </arc>
+    <arc id="A6" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T3" target="sugar_beet" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="489" yCoord="255"/>
+      <arcpath arcPointType="false" id="1" xCoord="399" yCoord="363"/>
+    </arc>
+    <arc id="A7" inscription="[7,8]" nameOffsetX="0" nameOffsetY="0" source="sugar_beet" target="T4" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="382" yCoord="362"/>
+      <arcpath arcPointType="false" id="1" xCoord="319" yCoord="255"/>
+    </arc>
+    <arc id="A8" inscription="1" nameOffsetX="0" nameOffsetY="0" source="T4" target="server" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="309" yCoord="255"/>
+      <arcpath arcPointType="false" id="1" xCoord="249" yCoord="176"/>
+    </arc>
+    <arc id="A9" inscription="[5,6]" nameOffsetX="0" nameOffsetY="0" source="scan_weed_or_sugarbeet" target="T3" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="692" yCoord="143"/>
+      <arcpath arcPointType="false" id="1" xCoord="516" yCoord="266"/>
+      <arcpath arcPointType="false" id="2" xCoord="499" yCoord="255"/>
+    </arc>
+  </net>
+  <query active="true" approximationDenominator="2" capacity="4" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="null" gcd="true" hashTableSize="null" inclusionPlaces="*NONE*" name="Query Comment/if given markings are reachable in the net" overApproximation="true" pTrie="true" query="EF true" reduction="true" reductionOption="VerifyTAPNdiscreteVerification" searchOption="HEURISTIC" symmetry="true" timeDarts="false" traceOption="NONE" useStubbornReduction="true" useTarOption="false"/>
+  <k-bound bound="3"/>
+  <feature isGame="false" isTimed="true"/>
+</pnml>
